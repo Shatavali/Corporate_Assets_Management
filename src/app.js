@@ -25,13 +25,13 @@ app.use(helmet({
 app.use(cors({
   origin: [
     'http://localhost',
-    'http://localhost:5173'
+    'http://localhost:5173',
+    'https://corporate-assets-management-sai2.vercel.app'
   ],
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
-
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes

@@ -62,10 +62,10 @@ const Login = () => {
     setErrorMsg("");
 
     try {
-      const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
+      const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
 
-      const res = await axios.post(
-        `${API_BASE_URL}/api/auth/login`,
+const res = await axios.post(
+  `${API_BASE_URL}/auth/login`,
         {
           email: formData.email.trim(),
           password: formData.password,

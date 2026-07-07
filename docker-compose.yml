@@ -1,0 +1,45 @@
+services:
+  mongodb:
+    image: mongo:6
+    container_name: asset_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: your_root_password
+      MONGO_INITDB_DATABASE: asset_management
+
+  backend:
+    build: ./src
+    container_name: asset_backend
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      MONGO_URI: mongodb://mongodb:27017/corporate_asset_management
+      JWT_SECRET: your_jwt_secret_key_here
+      JWT_EXPIRE: 7d
+      SMTP_HOST: smtp.gmail.com
+      SMTP_PORT: 587
+      SMTP_MAIL: shatavalibahadure89@gmail.com
+      SMTP_PASSWORD: tmmoqawkytutyddm
+      FRONTEND_URL: http://localhost:5173
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./client
+    container_name: asset_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:

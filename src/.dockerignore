@@ -1,0 +1,5 @@
+node_modules
+.git
+.env
+*.log
+uploads   # if you don't want to copy existing uploads

@@ -24,7 +24,6 @@ import EditEmployee from './pages/Employees/EditEmployee';
 import ForgotPassword from './pages/Auth/ForgotPassword';
 import ResetPassword from './pages/Auth/ResetPassword';
 
-// ✅ Helper function – must be defined before usage
 const isAuthenticated = () => {
   return !!(localStorage.getItem('token') || sessionStorage.getItem('token'));
 };
@@ -39,9 +38,8 @@ function App() {
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
 
-      {/* Protected routes – using token check */}
+      {/* Protected routes - each renders independently */}
       <Route path="/dashboard" element={isAuthenticated() ? <Dashboard /> : <Navigate to="/login" />} />
-
       <Route path="/assets" element={isAuthenticated() ? <AssetList /> : <Navigate to="/login" />} />
       <Route path="/assets/add" element={isAuthenticated() ? <AddAsset /> : <Navigate to="/login" />} />
       <Route path="/assets/edit/:id" element={isAuthenticated() ? <EditAsset /> : <Navigate to="/login" />} />
